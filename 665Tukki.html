@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OUR LANGUAGE</title>
+	<style>
+		body {
+         font-family: Arial, sans-serif;
+         background-image: url('https://media.istockphoto.com/id/610015562/vector/two-birds-sitting-on-the-wires-vector-illustration.jpg?s=612x612&w=0&k=20&c=ASlx54v8o7M-v8Ulj6gLHHzb_WBmMq-VW1QPPKNrfFM=');
+         background-size: cover;
+         background-position: center;
+        }
+
+		h1 {
+			color: #6e036e;
+			text-align: center;
+		}
+		form {
+			width: 50%;
+			margin: auto;
+			background-color: #f4f3f600;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+			text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+		}
+		label {
+			font-size: 25px;
+			color: #0a0263;
+		}
+		input[type="text"], textarea {
+			display: block;
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+			font-size: 16px;
+			border: 1px solid #ccc;
+		}
+		input[type="button"] {
+			background-color: #0055a5;
+			color: #ffffff;
+			border: none;
+			border-radius: 5px;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.3s ease-in-out;
+			border-radius: 20px;
+            background: linear-gradient(to bottom, #0055a5 0%, #003366 100%);
+		}
+		input[type="button"]:hover {
+			background-color: #0055a5;
+		}
+		#output {
+			height: 120px;
+            background-color: #fff;
+            color: #000;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Tukki Code Converter</h1>
+	<form>
+		<label for="input">Enter Your Message:</label>
+		<input type="text" id="input" name="input">
+		<label for="output">Here Your Tukki:</label>
+		<textarea id="output" name="output"></textarea>
+		<input type="button" value="Convert to Tukki" onclick="convertToMorseCode();">
+		<input type="button" value="Convert to Text" onclick="convertToText();">
+	</form>
+	<script>
+		function convertToMorseCode() {
+			var input = document.getElementById("input").value;
+			var output = document.getElementById("output");
+			var i, j;
+			var morseCode = [".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."];
+			var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			var morse = "";
+			var letter = "";
+			input = input.toUpperCase();
+			for (i = 0; i < input.length; i++) {
+				letter = input.charAt(i);
+				if (letter == " ") {
+					morse += " ";
+				} else {
+					for (j = 0; j < letters.length; j++) {
+						if (letter == letters.charAt(j)) {
+							morse += morseCode[j] + " ";
+							break;
+						}
+					}
+				}
+			}
+			output.value = morse;
+		}
+
+		function convertToText() {
+			var input = document.getElementById("input").value;
+			var output = document.getElementById("output");
+			var i, j;
+			var morseCode = [".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."];
+			var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+			var morse = input.split(" ");
+			var letter = "";
+			var text = "";
+			for (i = 0; i < morse.length; i++) {
+				if (morse[i] == " ") {
+					text += " ";
+				} else {
+					for (j = 0; j < morseCode.length; j++) {
+						if (morse[i] == morseCode[j]) {
+							text += letters.charAt(j);
+							break;
+						}
+					}
+				}
+			}
+			output.value = text;
+		}
+	</script>
+
+</body>
+</html>
